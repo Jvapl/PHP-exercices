@@ -1,0 +1,17 @@
+{
+  "name": "ex-php",
+  "version": "0.1.96",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "biome check --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "BSD 2-Clause License",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.13",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.5.1"
+  }
+}
