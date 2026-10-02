@@ -46,6 +46,7 @@ class Basics
      */
     public static function concatenate(string $str1, string $str2): string
     {
+        return $str1 . $str2;
     }
 
     /**
