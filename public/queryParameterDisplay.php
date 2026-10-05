@@ -2,10 +2,13 @@
 /**
  * Get the values from the GET parameters with filter_input function
  */
-    $name = filter_input(INPUT_GET, 'name') ?? null;
-    $age = filter_input(INPUT_GET, 'age') ?? null;
-    
-    $parsed_info = "{$name} is {$age} years old";
+    (string) $msgParameter = " ";
+    (string) $name = filter_input(INPUT_GET, 'name') ?? null;
+    (string) $age = filter_input(INPUT_GET, 'age') ?? null;
+    $parsed_info = 'No query parameters found';
+    if ($name && $age) {
+        $parsed_info = "{$name} is {$age} years old";
+    }
 ?>
 
 <!doctype html>
@@ -22,5 +25,15 @@
 <!-- Display parameters here in a h1 tag -->
     <h1><?=$parsed_info?></h1>
 <!-- Display message in list element in case of missing parameters -->
+    <?php if(!$name || !$age): ?>
+        <ul>
+            <?php if(empty($name)): ?>
+                <li>Missing name</li>
+            <?php endif; ?>
+            <?php if(empty($age)): ?>
+                <li>Missing age</li>
+            <?php endif; ?>
+        </ul>
+    <?php endif; ?>
 </body>
 </html>
