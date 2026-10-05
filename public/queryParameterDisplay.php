@@ -2,7 +2,10 @@
 /**
  * Get the values from the GET parameters with filter_input function
  */
-
+    $name = filter_input(INPUT_GET, 'name') ?? null;
+    $age = filter_input(INPUT_GET, 'age') ?? null;
+    
+    $parsed_info = "{$name} is {$age} years old";
 ?>
 
 <!doctype html>
@@ -17,8 +20,7 @@
 <body>
 
 <!-- Display parameters here in a h1 tag -->
-
+    <h1><?=$parsed_info?></h1>
 <!-- Display message in list element in case of missing parameters -->
-
 </body>
 </html>
