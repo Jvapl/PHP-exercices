@@ -17,6 +17,11 @@ class ArraysAndLoops
      */
     public static function generateRandomArray(): array
     {
+        $numbers = [];
+        for ($i = 0; $i < 100; $i++){
+            $numbers[] = rand(1, 10);
+        }
+        return $numbers;
     }
 
     /**
