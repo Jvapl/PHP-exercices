@@ -30,7 +30,18 @@ class ArraysAndLoops
      * @return array<int, int>
      */
     public static function countNumbers(array $array): array
-    {
+    {   
+        $repNumbers = [];
+        foreach ($array as $value){
+            $count = 0;
+            for ($index = 0; $index > count($array); $index++){
+                if ($value == $array[$index]) {
+                    $repNumbers[] = [$value => $count++];
+                }
+            }
+        }
+        return $repNumbers;
+        // array_count_values($array) "hm! ok";
     }
 
     /**
