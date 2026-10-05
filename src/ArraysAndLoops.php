@@ -52,6 +52,10 @@ class ArraysAndLoops
      */
     public static function filterUsers(array $users, string $attribute, $value): array
     {
+    return array_filter($users, function($user) use ($attribute, $value) {
+        $typedUser = $user->$attribute() === $value;
+        return $typedUser;
+    });
     }
 
     /**
