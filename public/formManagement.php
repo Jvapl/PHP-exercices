@@ -10,16 +10,11 @@
  * (Your form should be semantically correct, use a label and name your fields)
  */
 
-(string) $name = filter_input(INPUT_GET, 'name');
-(string) $age  = filter_input(INPUT_GET, 'age');
+$name = trim((string) filter_input(INPUT_GET, 'name'));
+$age = trim((string) filter_input(INPUT_GET, 'age'));
 
-$isSubmitted = $name !== '' && $age !== '' && $age;
-$ageInt = $isSubmitted ? $age : 0;
-
-function userInformation($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES);
-}
+$isSubmitted = $name !== '' && $age !== '';
+$ageInt = (int) $age;
 ?>
 
 <!doctype html>
@@ -27,30 +22,23 @@ function userInformation($value)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Form management</title>
 </head>
 <body>
 
-<form action="" method="get">
+<form method="get">
     <label for="inputName">Name</label>
-    <input id="inputName" name="name" type="text" value="<?= userInformation($name) ?>">
+    <input id="inputName" name="name" type="text" value="<?= htmlspecialchars($name) ?>">
 
     <label for="inputAge">Age</label>
-    <input id="inputAge" name="age" type="number" min="0" value="<?= userInformation($age) ?>">
+    <input id="inputAge" name="age" type="number" min="0" value="<?= htmlspecialchars($age) ?>">
 
     <button type="submit">Submit</button>
 </form>
 
 <h1>
     <?php if ($isSubmitted): ?>
-        <?php if (mb_strlen($name) > 6): ?>
-
-            <span style="color: red;"><?= userInformation($name) ?></span>
-        <?php else: ?>
-            <?= userInformation($name) ?>
-
-        <?php endif; ?>
+        <span <?= mb_strlen($name) > 6 ? 'style="color: red;"' : '' ?>><?= htmlspecialchars($name) ?></span>
         is <?= $ageInt ?> years old
     <?php else: ?>
         Submit the form
@@ -58,7 +46,6 @@ function userInformation($value)
 </h1>
 
 <?php if ($isSubmitted && $ageInt > 18): ?>
-
     <ul>
         <?php for ($i = 1; $i <= $ageInt; $i++): ?>
             <li><?= $i ?></li>
