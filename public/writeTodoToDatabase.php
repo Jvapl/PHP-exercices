@@ -24,18 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     
     $dueDate = DatetimeImmutable::createFromFormat('Y-m-d', $date);
 
-    if (($dueDate->setTime(0,0) < new DateTimeImmutable('today'))){
+    if (($dueDate < new DateTimeImmutable('today'))){
         $errors[] = "This date must be on the future";
     }   
 
     if (empty($errors)){
-        $pdo = new PDO("sqlite:" . __DIR__ . "/../database.db");
+        
+$pdo = new PDO("sqlite:" . __DIR__ . "/../database.db");
         $stmt = $pdo->prepare('INSERT INTO todos (title, due_date) VALUES (?, ?)');
         $stmt->execute([$title,$date]);
-        
         header('Location: /displayAllTodosFromDatabase.php');
         exit;
-    }
+        }
 }
 
 ?>
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
  <?php foreach ($errors as $error):?>
     <p style="color: red;"><?= htmlspecialchars($error) ?></p>
  <?php endforeach?>
-    <form method="POST">
+    <form action="writeTodoToDatabase.php" method="POST">
         <label for="inputTitle">Title :</label>
         <input id="inputTitle" name="name" type="text" value="<?= htmlspecialchars($title) ?>">
         <label for="inputDate">Date :</label>
@@ -67,6 +67,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     </form>
 </body>
 </html>
-
-
-<!-- Aprentices2@ password -->
