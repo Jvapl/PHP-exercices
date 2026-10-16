@@ -16,7 +16,7 @@ $sort = filter_input(INPUT_GET, 'sort', FILTER_UNSAFE_RAW);
 
 $query = "SELECT * FROM todos";
 
-if ($sort === "name"){
+if ($sort === "name") {
     $query = 'SELECT * FROM todos ORDER BY title ASC';
 } elseif ($sort === "date") {
     $query = 'SELECT * FROM todos ORDER BY due_date ASC';

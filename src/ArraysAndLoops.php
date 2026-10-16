@@ -18,7 +18,7 @@ class ArraysAndLoops
     public static function generateRandomArray(): array
     {
         $numbers = [];
-        for ($i = 0; $i < 100; $i++){
+        for ($i = 0; $i < 100; $i++) {
             $numbers[] = rand(1, 10);
         }
         return $numbers;
@@ -30,11 +30,11 @@ class ArraysAndLoops
      * @return array<int, int>
      */
     public static function countNumbers(array $array): array
-    {   
+    {
         $repNumbers = [];
-        foreach ($array as $value){
+        foreach ($array as $value) {
             $count = 0;
-            for ($index = 0; $index > count($array); $index++){
+            for ($index = 0; $index > count($array); $index++) {
                 if ($value == $array[$index]) {
                     $repNumbers[] = [$value => $count++];
                 }
@@ -52,10 +52,10 @@ class ArraysAndLoops
      */
     public static function filterUsers(array $users, string $attribute, $value): array
     {
-    return array_filter($users, function($user) use ($attribute, $value) {
-        $typedUser = $user->$attribute() === $value;
-        return $typedUser;
-    });
+        return array_filter($users, function ($user) use ($attribute, $value) {
+            $typedUser = $user->$attribute() === $value;
+            return $typedUser;
+        });
     }
 
     /**
@@ -65,7 +65,7 @@ class ArraysAndLoops
      */
     public static function transformUsers(array $users): array
     {
-        $changeArray = array_map(function($user){
+        $changeArray = array_map(function ($user) {
             $user->setName(ucfirst($user->getName()));
             if ($user->getAge() % 2 === 0) {
                 return $user->setAge(($user->getAge() / 2) + 2);

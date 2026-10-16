@@ -11,9 +11,9 @@
 $error = null;
 $id = filter_input(INPUT_POST, 'id', FILTER_UNSAFE_RAW);
 
-if ($id === false || $id === null){
+if ($id === false || $id === null) {
     $error = "Invalid or missing todo id";
-}else {
+} else {
     try {
         $pdo = new PDO("sqlite:" . __DIR__ . "/../database.db");
 
@@ -21,9 +21,9 @@ if ($id === false || $id === null){
         $stmt = $pdo->prepare('DELETE FROM todos WHERE id = :id');
         $stmt->execute(['id' => $id]);
 
-        
-        
-    }catch (PDOException $e) {
+
+
+    } catch (PDOException $e) {
         error_log($e->getMessage());
         $error = "Something went wrong while deleting todo";
     }

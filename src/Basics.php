@@ -35,7 +35,7 @@ class Basics
      */
     public static function condition(string $str): bool
     {
-        if (mb_strlen($str) > 10){
+        if (mb_strlen($str) > 10) {
             return true;
         };
         return false;
@@ -66,7 +66,7 @@ class Basics
         } else {
             $words = array_slice($words, 0, $wordsCountToRemain);
         }
-        
+
         return implode(' ', $words);
     }
 }

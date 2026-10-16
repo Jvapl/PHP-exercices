@@ -1,6 +1,6 @@
 <?php
 // Calculate current time here
-    $date = date('Y-m-d H:i:s');                      
+$date = date('Y-m-d H:i:s');
 ?>
 
 <!doctype html>

@@ -14,28 +14,28 @@ $errors = [];
 $title = '';
 $date = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim((string) filter_input(INPUT_POST, 'name', FILTER_UNSAFE_RAW));
     $date = trim((string) filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW));
 
-    if (mb_strlen($title) < 3){
+    if (mb_strlen($title) < 3) {
         $errors[] = 'This title must have 3 characters minimum';
     }
-    
+
     $dueDate = DatetimeImmutable::createFromFormat('Y-m-d', $date);
 
-    if (($dueDate < new DateTimeImmutable('today'))){
+    if (($dueDate < new DateTimeImmutable('today'))) {
         $errors[] = "This date must be on the future";
-    }   
+    }
 
-    if (empty($errors)){
-        
-$pdo = new PDO("sqlite:" . __DIR__ . "/../database.db");
+    if (empty($errors)) {
+
+        $pdo = new PDO("sqlite:" . __DIR__ . "/../database.db");
         $stmt = $pdo->prepare('INSERT INTO todos (title, due_date) VALUES (?, ?)');
         $stmt->execute([$title,$date]);
         header('Location: /displayAllTodosFromDatabase.php');
         exit;
-        }
+    }
 }
 
 ?>
