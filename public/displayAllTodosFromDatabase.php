@@ -44,7 +44,7 @@ try {
 
 <h1>
     All todos
-</h1>
+</h1>   
 
 <a href="writeTodoToDatabase.php">Ajouter une nouvelle todo</a>
 
@@ -62,9 +62,13 @@ try {
 <ul>
     <?php foreach ($todos as $todo) :?>
         <li>
-            <?= htmlspecialchars($todo['title'])?><br>
-            <?= htmlspecialchars(new DateTimeImmutable($todo['due_date'])->format('m/d/Y')
-                )?>
+            <form action="deleteTodoFromDatabase.php" method="POST">
+                <?= htmlspecialchars($todo['title'])?><br>
+                <?= htmlspecialchars(new DateTimeImmutable($todo['due_date'])->format('m/d/Y'))?>
+                <input type="hidden" name="id" value="<?= (int) $todo['id'] ?>">
+
+                <button type="submit">Delete</button>
+            </form>
         </li>
     <?php endforeach?>
 </ul>
